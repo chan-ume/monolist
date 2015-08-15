@@ -1,0 +1,41 @@
+<% i = 1 %>
+
+<div class="container">
+<% @items.each do |wanteditem| %>
+    <div class="row">
+        <div class="col-sm-2">
+           <p style="font-size: 150%; color: red;">第<%= i %>位は……</p> 
+        </div>
+        <div class="col-sm-4" >
+             <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% if wanteditem.large_image.present? %>
+              <%= image_tag(wanteditem.large_image , alt: wanteditem.title) %>
+            <% else %>
+              <%= image_tag("no-image.png" , alt: wanteditem.title) %>
+            <% end %>
+              </div>
+        </div>
+        <div class="detail">
+          <p class="title">
+            <%= wanteditem.title %>
+          </p>
+        </div>
+        <%= render 'items/action' , item: wanteditem if logged_in? %>
+      </div>
+        </div>
+        <div class="col-sm-4">
+            <p style="font-size: 130%; margin: 50px 0 50px 0">wantしているユーザーは
+            <%= wanteditem.want_users.count %>
+            人です！</p></br></br>
+            <p>詳しくは詳細ページへ</p>
+        </div>
+    
+    </div>
+    <% i=i+1 %>
+</br></br></br>
+</br></br></br>
+<% end %>
+</div>
+    
